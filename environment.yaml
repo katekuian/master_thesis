@@ -1,0 +1,14 @@
+name: master
+channels:
+  - conda-forge
+dependencies:
+  - ipykernel
+  - pandas
+  - numpy
+  - scipy
+  - pytorch
+  - transformers
+  - pillow
+  # - pip
+  # - pip:
+  #   - Flask-Testing
