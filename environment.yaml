@@ -6,9 +6,16 @@ dependencies:
   - pandas
   - numpy
   - scipy
+  - opencv
   - pytorch
-  - transformers
+  - transformers[torch]
+  - evaluate
+  - tqdm                                  
+  - torchvision
+  - matplotlib
+  # - datasets
   - pillow
-  # - pip
-  # - pip:
-  #   - Flask-Testing
+  - pip
+  - pip:
+    - xformers
+    - accelerate -U
