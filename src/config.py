@@ -1,0 +1,10 @@
+crop = 'broad_bean'
+# crop = 'common_buckwheat'
+# crop = 'pea'
+# crop = 'corn'
+# crop = 'soybean'
+# crop = 'sunflower'
+# crop = 'sugar_beet'
+
+# model_type = 'multiclass'
+model_type = 'binary'

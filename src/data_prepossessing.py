@@ -69,3 +69,22 @@ def create_datasets_for_plants(plant_names, model_type, crop):
         test_ds = datasets.concatenate_datasets([test_ds, p_test_ds])
 
     return train_ds, val_ds, test_ds
+
+
+def get_labels(crop, model_type):
+    labels = ['void', 'soil', crop]
+
+    if model_type == 'binary':
+        labels.append('weeds')
+    elif model_type == 'multiclass':
+        for weed_plant in constants.weed_plants:
+            labels.append(weed_plant)
+
+    ids = list(range(0, len(labels)))
+
+    id2label = dict(zip(ids, labels))
+    label2id = dict(zip(labels, ids))
+
+    num_labels = len(labels)
+
+    return id2label, label2id
