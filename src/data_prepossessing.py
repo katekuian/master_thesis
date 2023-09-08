@@ -15,13 +15,17 @@ def get_image_meta_filepath(plant_name):
     return './meta/' + plant_name + suffix
 
 
+def get_images_to_exclude():
+    return json.load(codecs.open('./meta/images_to_exclude_from_models.json', 'r', 'utf-8-sig'))    
+
+
 def get_image_list_for_plant(plant_name, model_type, crop):
     # Create an empty list to store the dataset
     image_list = []
     plant_image_names = json.load(codecs.open(get_image_meta_filepath(plant_name), 'r', 'utf-8-sig'))
 
     # Exclude images that contain more than one crop
-    image_names_to_exclude = ['img_01096.png' 'img_01098.png']
+    image_names_to_exclude = get_images_to_exclude()
     plant_image_names = [image_name for image_name in plant_image_names if image_name not in image_names_to_exclude]
     print(plant_image_names)
 
