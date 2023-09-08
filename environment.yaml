@@ -1,6 +1,8 @@
 name: master
 channels:
   - conda-forge
+  - pytorch
+  - nvidia
 dependencies:
   - ipykernel
   - pandas
@@ -13,6 +15,9 @@ dependencies:
   - matplotlib
   - datasets
   - pillow
+  - pytorch=11.7
+  - torchvision
+  - torchaudio
   - pip 
   - pip:
     - xformers
