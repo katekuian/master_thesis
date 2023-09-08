@@ -7,8 +7,8 @@ image_folder = './WE3DS/images/'
 annotation_folder = './WE3DS/annotations/'
 annotations_aggregated_folder = './WE3DS/annotations_aggregated/'
 # Define the paths to the images and annotations
-image_paths = np.array(os.listdir(image_folder))
-annotation_paths = np.array(os.listdir(annotation_folder))
+image_filenames = np.array(os.listdir(image_folder))
+annotation_filenames = np.array(os.listdir(annotation_folder))
 
 plant_classification = {
     'void': 'void',
