@@ -7,7 +7,8 @@ image_folder = './WE3DS/images/'
 annotation_folder = './WE3DS/annotations/'
 annotations_aggregated_folder = './WE3DS/annotations_aggregated/'
 # Define the paths to the images and annotations
-all_image_names = np.array(os.listdir(image_folder))
+image_paths = np.array(os.listdir(image_folder))
+annotation_paths = np.array(os.listdir(annotation_folder))
 
 plant_classification = {
     'void': 'void',
@@ -35,3 +36,28 @@ crop_indices = [index for index, value in enumerate(plant_classification) if pla
 weed_indices = [index for index, value in enumerate(plant_classification) if plant_classification[value] == 'weed']
 
 weed_plants = [plant_name.replace(" ", "_") for plant_name, classification in plant_classification.items() if classification == 'weed']
+
+color_values = [
+    [255, 255, 255],
+    [0, 0, 0],
+    [0, 128, 0],
+    [128, 128, 0],
+    [0, 0, 128],
+    [128, 0, 128],
+    [0, 128, 128],
+    [128, 128, 128],
+    [64, 0, 0],
+    [192, 0, 0],
+    [64, 128, 0],
+    [192, 128, 0],
+    [64, 0, 128],
+    [192, 0, 128],
+    [64, 128, 128],
+    [192, 128, 128],
+    [0, 64, 0],
+    [128, 64, 0],
+    [0, 192, 0],
+    [128, 0, 0]
+]
+
+hex_colors = ['#{:02X}{:02X}{:02X}'.format(r, g, b) for r, g, b in color_values]
