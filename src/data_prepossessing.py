@@ -27,7 +27,7 @@ def get_image_list_for_plant(plant_name, model_type, crop):
     # Exclude images that contain more than one crop
     image_names_to_exclude = get_images_to_exclude()
     plant_image_names = [image_name for image_name in plant_image_names if image_name not in image_names_to_exclude]
-    print(plant_image_names)
+    # print(plant_image_names)
 
     # Iterate over the image and annotation paths
     for image_name in plant_image_names:
@@ -52,7 +52,7 @@ def get_image_list_for_plant(plant_name, model_type, crop):
 
 def create_and_split_dataset_for_plant(plant_image_list):
     dataset = datasets.Dataset.from_list(plant_image_list)
-    dataset = dataset.train_test_split(test_size=0.5, seed=constants.seed)
+    dataset = dataset.train_test_split(test_size=0.7, seed=constants.seed)
     train_ds = dataset["train"]
     val_ds, test_ds = dataset["test"].train_test_split(test_size=0.5, seed=constants.seed).values()
     return train_ds, val_ds, test_ds
@@ -60,12 +60,12 @@ def create_and_split_dataset_for_plant(plant_image_list):
 
 def create_datasets_for_plants(plant_names, model_type, crop):
     p0_image_list = get_image_list_for_plant(plant_names[0], model_type, crop)
-    print("Number of plant images for plant", plant_names[0], ":", len(p0_image_list))
+    # print("Number of plant images for plant", plant_names[0], ":", len(p0_image_list))
     train_ds, val_ds, test_ds = create_and_split_dataset_for_plant(p0_image_list)
 
     for plant_name in plant_names[1:]:
         p_image_list = get_image_list_for_plant(plant_name, model_type, crop)
-        print("Number of plant images for plant", plant_name, ":", len(p_image_list))
+        # print("Number of plant images for plant", plant_name, ":", len(p_image_list))
         p_train_ds, p_val_ds, p_test_ds = create_and_split_dataset_for_plant(p_image_list)
 
         train_ds = datasets.concatenate_datasets([train_ds, p_train_ds])
@@ -81,14 +81,15 @@ def get_labels(crop, model_type):
     if model_type == 'binary':
         labels.append('weeds')
     elif model_type == 'multiclass':
-        for weed_plant in constants.weed_plants:
-            labels.append(weed_plant)
+        weed_indices_to_exclude = json.load(codecs.open('./meta/weed_indices_to_exclude_from_models.json', 'r', 'utf-8-sig'))
+        weed_indices_to_consider = [x for x in constants.weed_indices if x not in weed_indices_to_exclude]
+        for weed_index in weed_indices_to_consider:
+            weed_name = list(constants.plant_classification.keys())[weed_index]
+            labels.append(weed_name.replace(" ", "_"))
 
     ids = list(range(0, len(labels)))
 
     id2label = dict(zip(ids, labels))
     label2id = dict(zip(labels, ids))
-
-    num_labels = len(labels)
 
     return id2label, label2id
