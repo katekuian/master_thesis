@@ -52,7 +52,7 @@ def get_image_list_for_plant(plant_name, model_type, crop):
 
 def create_and_split_dataset_for_plant(plant_image_list):
     dataset = datasets.Dataset.from_list(plant_image_list)
-    dataset = dataset.train_test_split(test_size=0.7, seed=constants.seed)
+    dataset = dataset.train_test_split(test_size=0.5, seed=constants.seed)
     train_ds = dataset["train"]
     val_ds, test_ds = dataset["test"].train_test_split(test_size=0.5, seed=constants.seed).values()
     return train_ds, val_ds, test_ds
