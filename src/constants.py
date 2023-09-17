@@ -3,10 +3,17 @@ import os
 
 seed = 9876
 
-image_folder = './WE3DS/images/'
-annotation_folder = './WE3DS/annotations/'
-annotations_aggregated_folder = './WE3DS/annotations_aggregated/'
+image_folder = '../WE3DS/images/'
+annotation_folder = '../WE3DS/annotations/'
+annotations_binary_folder = '../WE3DS/annotations_binary/'
+annotations_multiclass_folder = '../WE3DS/annotations_multiclass/'
 image_filenames = np.array(os.listdir(image_folder))
+
+meta_folder = '../meta/'
+images_to_exclude_from_models_filepath = meta_folder + 'images_to_exclude_from_models.json'
+weed_indices_to_exclude_from_models_filepath = meta_folder + 'weed_indices_to_exclude_from_models.json'
+
+models_folder = '../models/'
 
 plant_classification = {
     'void': 'void',
