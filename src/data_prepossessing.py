@@ -27,21 +27,21 @@ def get_image_list_for_plant(plant_name, model_type, crop):
 
     # Iterate over the image and annotation paths
     for image_name in plant_image_names:
-        # Load the image and annotation using PIL
-        image = Image.open(constants.image_folder + image_name)
-        path = None
-        if model_type == 'multiclass':
-            path = constants.annotations_multiclass_folder + crop + '/' + image_name
-        elif model_type == 'binary':
-            path = constants.annotations_binary_folder + crop + '/' + image_name
+        # Load the image using PIL with a 'with' statement
+        with Image.open(constants.image_folder + image_name) as image:
+            path = None
+            if model_type == 'multiclass':
+                path = constants.annotations_multiclass_folder + crop + '/' + image_name
+            elif model_type == 'binary':
+                path = constants.annotations_binary_folder + crop + '/' + image_name
 
-        annotation = Image.open(path)
-        
-        # Create a dictionary entry for the dataseta
-        entry = {'image': image, 'annotation': annotation}
-        
-        # Add the entry to the dataset
-        image_list.append(entry)
+            # Load the annotation using PIL with a 'with' statement
+            with Image.open(path) as annotation:
+                # Create a dictionary entry for the dataset
+                entry = {'image': image, 'annotation': annotation}
+
+                # Add the entry to the dataset
+                image_list.append(entry)
 
     return image_list
 
