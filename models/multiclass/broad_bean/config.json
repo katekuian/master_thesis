@@ -31,31 +31,21 @@
     "0": "void",
     "1": "soil",
     "2": "broad_bean",
-    "3": "corn_spurry",
-    "4": "red-root_amaranth",
-    "5": "red_fingergrass",
-    "6": "common_wild_oat",
-    "7": "cornflower",
-    "8": "corn_cockle",
-    "9": "milk_thistle",
-    "10": "rye_brome",
-    "11": "narrow-leaved_plantain",
-    "12": "small-flower_geranium"
+    "3": "cornflower",
+    "4": "corn_cockle",
+    "5": "milk_thistle",
+    "6": "rye_brome",
+    "7": "small-flower_geranium"
   },
   "image_size": 224,
   "initializer_range": 0.02,
   "label2id": {
     "broad_bean": 2,
-    "common_wild_oat": 6,
-    "corn_cockle": 8,
-    "corn_spurry": 3,
-    "cornflower": 7,
-    "milk_thistle": 9,
-    "narrow-leaved_plantain": 11,
-    "red-root_amaranth": 4,
-    "red_fingergrass": 5,
-    "rye_brome": 10,
-    "small-flower_geranium": 12,
+    "corn_cockle": 4,
+    "cornflower": 3,
+    "milk_thistle": 5,
+    "rye_brome": 6,
+    "small-flower_geranium": 7,
     "soil": 1,
     "void": 0
   },
@@ -96,5 +86,5 @@
     2
   ],
   "torch_dtype": "float32",
-  "transformers_version": "4.31.0"
+  "transformers_version": "4.33.1"
 }
