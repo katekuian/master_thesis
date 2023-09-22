@@ -15,7 +15,7 @@ if module_path not in sys.path:
     sys.path.append(module_path)
 from data_prepossessing import create_datasets_for_plants, get_labels
 from constants import seed, weed_plants, models_folder
-from config import model_type, crop
+from config import model_type, crop, model_types, crops
 
 
 def init_image_processor(checkpoint):
@@ -140,10 +140,15 @@ def train_model_of_type_for_crop(model_type, crop):
         json.dump(test_metric, file)
 
 
-
 def train_model_from_config():
     train_model_of_type_for_crop(model_type, crop)
 
 
+def train_all_models_from_config():
+    for model_type in model_types:
+        for crop in crops:
+            train_model_of_type_for_crop(model_type, crop)
+
+
 if __name__ == '__main__':
-    print(train_model_from_config())
+    print(train_all_models_from_config())

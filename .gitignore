@@ -1,3 +1,5 @@
 WE3DS/
-segformer-b0-scene-parse-150/
+notebooks/segformer-b0-scene-parse-150/
+src/segformer-b0-scene-parse-150/
+meta/
 **/__pycache__/
