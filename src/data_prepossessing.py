@@ -38,7 +38,7 @@ def get_image_list_for_plant(plant_name, model_type, crop):
             # Load the annotation using PIL with a 'with' statement
             with Image.open(path) as annotation:
                 # Create a dictionary entry for the dataset
-                entry = {'image': image, 'annotation': annotation}
+                entry = {'image': image, 'annotation': annotation, 'image_name': image_name}
 
                 # Add the entry to the dataset
                 image_list.append(entry)
