@@ -3,6 +3,7 @@ import numpy as np
 import cv2
 import matplotlib.lines as mlines
 import constants
+import torch
 
 
 def get_legend(plant_classification, hex_colors):
@@ -14,7 +15,7 @@ def get_legend(plant_classification, hex_colors):
     return legend_elements
 
 
-def visualize_annotation_for_image(im):
+def plot_annotation_for_image(im):
     rgb = np.zeros_like(im)
     for i in range(im.shape[0]):
         for j in range(im.shape[1]):
@@ -27,6 +28,28 @@ def visualize_annotation_for_image(im):
     plt.show()
 
 
-def visualize_annotation(image_name):
+def plot_ground_truth_annotation(image_name):
     im = cv2.imread(constants.annotation_folder + image_name)
-    visualize_annotation_for_image(im)
+    plot_annotation_for_image(im)
+
+
+def plot_original_image(image_name):
+    im = cv2.imread(constants.image_folder + image_name)
+    plt.axis('off')
+    plt.imshow(im)
+
+
+def plot_predicted_segm_mask(pred_seg, image_name, model_type):
+    im = pred_seg.detach().cpu().numpy()
+    np.unique(im, return_counts=True)
+    rgb = np.zeros((*im.shape, 3), dtype=np.uint8)
+
+    for i in range(im.shape[0]):
+        for j in range(im.shape[1]):
+            index = im[i, j]
+            rgb[i, j] = constants.color_values[index]
+
+    plt.axis('off')
+    plt.imshow(rgb)
+    plt.show()
+    plt.savefig(constants.predicted_segm_masks_folder + model_type + '_' + image_name, bbox_inches='tight', pad_inches=0)

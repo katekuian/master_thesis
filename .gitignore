@@ -2,4 +2,5 @@ WE3DS/
 notebooks/segformer-b0-scene-parse-150/
 src/segformer-b0-scene-parse-150/
 meta/
+predicted_segm_masks/
 **/__pycache__/

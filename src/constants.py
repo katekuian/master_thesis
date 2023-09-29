@@ -15,6 +15,8 @@ weed_indices_to_exclude_from_models_filepath = meta_folder + 'weed_indices_to_ex
 
 models_folder = '../models/'
 
+predicted_segm_masks_folder = '../predicted_segm_masks/'
+
 plant_classification = {
     'void': 'void',
     'soil': 'soil',
