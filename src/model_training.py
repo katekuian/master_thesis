@@ -72,6 +72,7 @@ def init_training_arguments(prediction_loss_only):
         remove_unused_columns=False,
         load_best_model_at_end=True,
         seed=seed,
+        dataloader_drop_last=True
     )
 
 
