@@ -10,7 +10,7 @@ crop = 'common_buckwheat'
 model_type = 'binary'
 
 crops = [ 
-    # 'broad_bean'
+    'broad_bean',
     'common_buckwheat',
     'pea',
     'corn',
