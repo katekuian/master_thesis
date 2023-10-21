@@ -41,7 +41,6 @@ def plot_original_image(image_name):
 
 def plot_predicted_segm_mask(pred_seg, image_name, model_type):
     im = pred_seg.detach().cpu().numpy()
-    np.unique(im, return_counts=True)
     rgb = np.zeros((*im.shape, 3), dtype=np.uint8)
 
     for i in range(im.shape[0]):
