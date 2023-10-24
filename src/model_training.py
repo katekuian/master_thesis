@@ -130,12 +130,39 @@ def train_model_of_type_for_crop(model_type, crop):
         log_history = trainer.state.log_history
         json.dump(log_history, file)
 
+    evaluate_model_of_type_for_crop(model_type, crop, model, metric, test_ds, num_classses)
+
+
+def evaluate_model_of_type_for_crop(model_type, crop, model, metric, test_ds, num_classses):
     # Instantiate new trainer for evaluation that will use compute_metrics method
     training_args_for_evaluation = init_training_arguments_for_evaluation()
-    eval_trainer = initialize_trainer(trainer.model, training_args_for_evaluation, num_classses, metric, train_ds, test_ds)
+    eval_trainer = initialize_trainer(model, training_args_for_evaluation, num_classses, metric, [], test_ds)
     test_metric = eval_trainer.evaluate(test_ds)
     with open(models_folder + model_type + '/' + crop + '/test_metric.json', 'w') as file:
         json.dump(test_metric, file)
+
+
+def evaluate_pretraine_model_of_type_for_crop(model_type, crop):
+    model_plant_names = [crop] + weed_plants
+    train_ds, test_ds = create_datasets_for_plants(model_plant_names, model_type, crop)
+    print("Test subset number of images: " + str(test_ds.num_rows))
+
+    image_processor = init_image_processor(checkpoint)
+    test_ds.set_transform(lambda example_batch: train_transforms(example_batch, image_processor))
+
+    # Generate labels for the model
+    id2label, label2id = get_labels(crop, model_type)
+    num_classses = len(id2label)
+
+    print('Number of classes:', num_classses)
+    print('id2label:', id2label)
+    print('label2id:', label2id)
+
+    # Initialize and train model
+    pretrained_model_checkpoint = models_folder + model_type + '/' + crop + '/'
+    model = AutoModelForSemanticSegmentation.from_pretrained(pretrained_model_checkpoint, id2label=id2label, label2id=label2id, ignore_mismatched_sizes=True)
+    metric = evaluate.load("mean_iou")
+    evaluate_model_of_type_for_crop(model_type, crop, model, metric, test_ds, num_classses)
 
 
 def train_model_from_config():
@@ -148,8 +175,13 @@ def train_all_models_from_config():
             train_model_of_type_for_crop(model_type, crop)
 
 
+def evaluate_model_from_config():
+    evaluate_model_of_type_for_crop(model_type, crop)
+
+
 if __name__ == '__main__':
     # print(train_all_models_from_config())
-    print(train_model_from_config())
+    # print(train_model_from_config())
+    print(evaluate_model_from_config())
 
     

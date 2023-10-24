@@ -30,5 +30,5 @@ model_types = ['binary', 'multiclass']
 checkpoint = "openmmlab/upernet-swin-tiny"
 
 
-# batch_size = 6
-batch_size = 2
+batch_size = 8
+# batch_size = 2
