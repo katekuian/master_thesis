@@ -142,7 +142,7 @@ def evaluate_model_of_type_for_crop(model_type, crop, model, metric, test_ds, nu
         json.dump(test_metric, file)
 
 
-def evaluate_pretraine_model_of_type_for_crop(model_type, crop):
+def evaluate_pretrained_model_of_type_for_crop(model_type, crop):
     model_plant_names = [crop] + weed_plants
     train_ds, test_ds = create_datasets_for_plants(model_plant_names, model_type, crop)
     print("Test subset number of images: " + str(test_ds.num_rows))
@@ -176,7 +176,7 @@ def train_all_models_from_config():
 
 
 def evaluate_model_from_config():
-    evaluate_model_of_type_for_crop(model_type, crop)
+    evaluate_pretrained_model_of_type_for_crop(model_type, crop)
 
 
 if __name__ == '__main__':
