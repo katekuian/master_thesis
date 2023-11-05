@@ -8,4 +8,6 @@ segformer-models-5-patience/
 upernet-swin-models-3-patience/
 upernet-swin-models-5-patience/
 confusion_matrices/
+model_performance_plots/
+trained_models_master_thesis.zip
 **/__pycache__/
