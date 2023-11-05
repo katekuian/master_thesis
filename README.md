@@ -16,3 +16,6 @@ Afterward, all remaining packages can be installed. ```conda``` will sometimes p
 
 ## Data
 You can download the required WE3DS dataset [here](https://zenodo.org/record/7457983). After download, you will have to extract all files in the master folder.
+
+
+GoogleDrive Link to the zip with all trained models - https://drive.google.com/file/d/1Tik2dQfYmeueDZbuGvftDsGSn1V6itHT/view?usp=drive_link .
