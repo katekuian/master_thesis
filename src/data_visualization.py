@@ -52,3 +52,7 @@ def plot_predicted_segm_mask(pred_seg, image_name, model_type):
     plt.imshow(rgb)
     plt.show()
     plt.savefig(constants.predicted_segm_masks_folder + model_type + '_' + image_name, bbox_inches='tight', pad_inches=0)
+
+
+def use_one_channel(im):
+    return im[:, :, 0]
