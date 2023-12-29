@@ -39,7 +39,7 @@ def plot_original_image(image_name):
     plt.imshow(im)
 
 
-def plot_predicted_segm_mask(pred_seg, image_name, model_type):
+def plot_predicted_segm_mask(pred_seg, image_name, model_type, models_folder):
     im = pred_seg.detach().cpu().numpy()
     rgb = np.zeros((*im.shape, 3), dtype=np.uint8)
 
@@ -51,7 +51,7 @@ def plot_predicted_segm_mask(pred_seg, image_name, model_type):
     plt.axis('off')
     plt.imshow(rgb)
     plt.show()
-    plt.savefig(constants.predicted_segm_masks_folder + model_type + '_' + image_name, bbox_inches='tight', pad_inches=0)
+    plt.savefig(constants.predicted_segm_masks_folder + models_folder + model_type + '_' + image_name, bbox_inches='tight', pad_inches=0)
 
 
 def use_one_channel(im):
